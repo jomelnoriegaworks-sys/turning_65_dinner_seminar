@@ -536,18 +536,6 @@
   color: var(--t65-orange-deep);
 }
 
-.t65-footer__disclaimer {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--t65-line);
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--t65-text-muted);
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* ---------- Mobile ---------- */
 @media (max-width: 720px) {
   .t65-page { font-size: 17px; }
