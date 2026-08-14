@@ -11,19 +11,21 @@
 <meta name="description" content="Join Tracy Davis Insurance Solutions for a complimentary dinner seminar on understanding Medicare as you approach age 65. Crawfordsville, IN." />
 <meta name="theme-color" content="#2A2140" />
 
+<!-- Images are hosted on GHL's Media Library (assets.cdn.filesafe.space) rather
+     than relative "assets/..." paths. GHL Custom HTML blocks don't serve a
+     sibling assets folder from the repo, so relative paths 404 once this is
+     pasted into the live page -- everything must be an absolute URL. -->
+
 <!-- Open Graph: gives the link a real preview card when texted or shared on Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Turning 65? Free Medicare Dinner Seminar" />
 <meta property="og:description" content="Complimentary dinner seminar in Crawfordsville, IN &mdash; understand your Medicare options with confidence." />
-<!-- PRE-LAUNCH BLOCKER: og:image below is a relative path + a placeholder logo.
-     1) Most link unfurlers (iMessage, Facebook, Slack) fail to resolve relative
-        og:image URLs — this MUST become an absolute URL once the page has a
-        real domain, e.g. https://solutions.tracydavisinsurance.com/turning-65-dinner/assets/share.jpg
-     2) Replace the plain logo with a designed 1200x630 share image before launch. -->
-<meta property="og:image" content="assets/logo.jpg" />
+<!-- PRE-LAUNCH NOTE: this is still the plain logo, not a designed 1200x630
+     share image. Replace with a proper share graphic before launch. -->
+<meta property="og:image" content="https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f9a6a03cda06bc6679.jpg" />
 
 <!-- Favicon placeholder: swap for a proper favicon.ico / apple-touch-icon before launch -->
-<link rel="icon" href="assets/logo.jpg" />
+<link rel="icon" href="https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f9a6a03cda06bc6679.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +39,7 @@
 <!-- ============= HEADER ============= -->
 <header class="t65-header" id="t65-header">
   <div class="t65-container">
-    <img src="assets/logo.jpg" alt="Tracy Davis Insurance Solutions logo" />
+    <img src="https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f9a6a03cda06bc6679.jpg" alt="Tracy Davis Insurance Solutions logo" />
   </div>
 </header>
 
@@ -54,10 +56,10 @@
     </p>
     <div class="t65-hero__photo">
       <img
-        src="assets/dinner-seminar.jpg"
-        srcset="assets/dinner-seminar-mobile.jpg 640w,
-                assets/dinner-seminar-tablet.jpg 900w,
-                assets/dinner-seminar.jpg 1536w"
+        src="https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f999074f5ef6ee867d.jpg"
+        srcset="https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f9dc6b0a15e5517312.jpg 640w,
+                https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f92b48e84b4fc219e3.jpg 900w,
+                https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f999074f5ef6ee867d.jpg 1536w"
         sizes="(max-width: 720px) 100vw, (max-width: 900px) 560px, 640px"
         width="1536" height="1024"
         loading="eager"
@@ -236,7 +238,7 @@
 <!-- ============= 7. FOOTER ============= -->
 <footer class="t65-footer">
   <div class="t65-container">
-    <img src="assets/logo.jpg" alt="" />
+    <img src="https://assets.cdn.filesafe.space/7GYL6JzchHkjIuo7Vfof/media/6a7f55f9a6a03cda06bc6679.jpg" alt="" />
     <p class="t65-footer__name">Tracy Davis Insurance Solutions</p>
 
     <ul class="t65-footer__contact">
