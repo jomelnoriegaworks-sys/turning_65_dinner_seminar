@@ -49,7 +49,7 @@
       Join us for a complimentary dinner seminar designed to help people approaching Medicare understand their options and prepare for the decisions ahead.
     </p>
     <p class="t65-hero__meta">Tuesday, Sept 8 or Thursday, Sept 17 &middot; 5:30 PM &middot; Arni&rsquo;s Crawfordsville</p>
-    <a class="t65-btn t65-btn--primary" href="#t65-register">Reserve My Seat</a>
+    <button type="button" class="t65-btn t65-btn--primary" data-open-registration>Reserve My Seat</button>
   </div>
 </section>
 
@@ -115,36 +115,8 @@
   <div class="t65-container">
     <h2 class="t65-section-heading">Reserve Your Seat</h2>
     <p class="t65-section-sub">Choose the date that works best for you and we&rsquo;ll confirm your registration by text.</p>
-
-    <div class="t65-form-wrap">
-      <!-- GHL FORM EMBED / FORM ELEMENT GOES HERE -->
-      <!-- The form below is a visual/structural reference only. It has no action
-           and does not submit anywhere. Replace it with the GHL form embed before
-           this page goes live. -->
-      <form class="t65-form" novalidate onsubmit="return false;">
-        <p class="t65-form-note">Fields marked <span aria-hidden="true">*</span><span class="t65-visually-hidden">(required)</span> are required.</p>
-        <div class="t65-field">
-          <label for="t65-name">Full Name <span aria-hidden="true">*</span></label>
-          <input type="text" id="t65-name" name="full_name" autocomplete="name" required />
-        </div>
-        <div class="t65-field">
-          <label for="t65-phone">Phone Number <span aria-hidden="true">*</span></label>
-          <input type="tel" id="t65-phone" name="phone" autocomplete="tel" required />
-        </div>
-        <div class="t65-field">
-          <label for="t65-email">Email Address <span aria-hidden="true">*</span></label>
-          <input type="email" id="t65-email" name="email" autocomplete="email" required />
-        </div>
-        <div class="t65-field">
-          <label for="t65-date">Preferred Seminar Date <span aria-hidden="true">*</span></label>
-          <select id="t65-date" name="preferred_date" required>
-            <option value="">Select a date&hellip;</option>
-            <option value="2026-09-08">Tuesday, September 8</option>
-            <option value="2026-09-17">Thursday, September 17</option>
-          </select>
-        </div>
-        <button type="submit" class="t65-btn t65-btn--primary t65-btn--block">Reserve My Seat</button>
-      </form>
+    <div class="t65-register__cta">
+      <button type="button" class="t65-btn t65-btn--primary" data-open-registration>Reserve My Seat</button>
     </div>
   </div>
 </section>
@@ -164,11 +136,84 @@
   <div class="t65-container">
     <h2>Ready to take the next step toward understanding Medicare?</h2>
     <p>Choose your seminar date below and reserve your seat.</p>
-    <a class="t65-btn t65-btn--primary" href="#t65-register">Reserve My Seat</a>
+    <button type="button" class="t65-btn t65-btn--primary" data-open-registration>Reserve My Seat</button>
   </div>
 </section>
 
 </main>
+
+<!-- GHL popup registration form.
+     GHL's form_embed.js only auto-opens iframes on its own built-in triggers
+     (page load / scroll / delay / exit-intent) — it exposes no public JS API
+     to open a popup from a custom button. So this page owns the show/hide
+     itself: the overlay below is hidden by default and toggled by the click
+     handler at the bottom of the page. form_embed.js is still loaded because
+     it manages the form's internal behavior (submission, redirect, sizing
+     messages) — it just isn't asked to control visibility. -->
+<div class="t65-modal" id="t65-registration-modal" hidden>
+  <div class="t65-modal__backdrop" data-close-registration></div>
+  <div class="t65-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="t65-modal-title">
+    <div class="t65-modal__header">
+      <span id="t65-modal-title" class="t65-modal__title">Reserve Your Seat</span>
+      <button type="button" class="t65-modal__close" data-close-registration aria-label="Close registration form">&times;</button>
+    </div>
+    <div class="t65-modal__body">
+      <iframe
+          src="https://link.sevenfigurecrm.com/widget/form/UJMVIrDBKZA0KZR8Lh6s"
+          style="width:100%;height:100%;border:none;border-radius:8px"
+          id="popup-UJMVIrDBKZA0KZR8Lh6s"
+          data-layout="{'id':'POPUP'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Turning 65 Dinner Seminar"
+          data-height="700"
+          data-layout-iframe-id="popup-UJMVIrDBKZA0KZR8Lh6s"
+          data-form-id="UJMVIrDBKZA0KZR8Lh6s"
+          title="Turning 65 Dinner Seminar"
+          data-modal-height="500"
+              >
+      </iframe>
+    </div>
+  </div>
+</div>
+<script src="https://link.sevenfigurecrm.com/js/form_embed.js"></script>
+<script>
+  (function () {
+    var modal = document.getElementById('t65-registration-modal');
+    if (!modal) return;
+    var lastFocused = null;
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var closeBtn = modal.querySelector('.t65-modal__close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+
+    document.querySelectorAll('[data-open-registration]').forEach(function (el) {
+      el.addEventListener('click', openModal);
+    });
+
+    modal.querySelectorAll('[data-close-registration]').forEach(function (el) {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  })();
+</script>
 
 <!-- ============= 7. FOOTER ============= -->
 <footer class="t65-footer">
