@@ -22,6 +22,15 @@
   --t65-shadow: 0 6px 20px rgba(42, 33, 64, 0.10);
   --t65-shadow-lift: 0 14px 34px rgba(42, 33, 64, 0.16);
   --t65-radius: 12px;
+
+  /* Motion tokens: one small, deliberate set of easing/durations so every
+     animation on the page reads as one system (Linear/Vercel/Stripe-style),
+     not a grab-bag of effects. Everything animated is opacity/transform
+     only — no layout properties — so it stays GPU-composited at 60fps. */
+  --t65-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t65-duration-fast: 0.2s;
+  --t65-duration-base: 0.4s;
+  --t65-duration-slow: 0.6s;
 }
 
 /* ---------- Reset / base ---------- */
@@ -51,6 +60,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .t65-page * { animation: none !important; transition: none !important; }
+  .t65-reveal,
+  .t65-reveal-item,
+  .t65-hero__eyebrow,
+  .t65-hero h1,
+  .t65-hero__sub,
+  .t65-hero__meta,
+  .t65-hero__content > .t65-btn,
+  .t65-header img {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Windows High Contrast / forced-colors mode: make sure interactive
@@ -81,6 +101,38 @@
 .t65-final-cta a:focus-visible,
 .t65-final-cta button:focus-visible {
   outline-color: var(--t65-orange);
+}
+
+/* ---------- Scroll reveal ----------
+   Applied via IntersectionObserver in a small script at the bottom of the
+   page. The hidden starting state is scoped to html.js (set by an inline
+   script in <head> before first paint) — if JS is disabled/blocked, that
+   class is never added and .t65-reveal content stays fully visible from
+   the start. True progressive enhancement, not just a claim in a comment. */
+html.js .t65-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--t65-duration-slow) var(--t65-ease),
+              transform var(--t65-duration-slow) var(--t65-ease);
+  will-change: opacity, transform;
+}
+
+html.js .t65-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children within a revealed group (e.g. the Why Attend cards) */
+html.js .t65-reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--t65-duration-base) var(--t65-ease),
+              transform var(--t65-duration-base) var(--t65-ease);
+}
+
+html.js .t65-reveal-item.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* ---------- Utilities ---------- */
@@ -114,10 +166,26 @@
 
 /* ---------- Header ---------- */
 .t65-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
   padding: 18px 0;
-  border-bottom: 1px solid var(--t65-line);
+  border-bottom: 1px solid transparent;
   background: var(--t65-white);
+  transition: background-color var(--t65-duration-base) var(--t65-ease),
+              border-color var(--t65-duration-base) var(--t65-ease),
+              box-shadow var(--t65-duration-base) var(--t65-ease);
 }
+
+/* Toggled by scroll-position JS once the page has scrolled past the hero. */
+.t65-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: var(--t65-line);
+  box-shadow: 0 2px 16px rgba(42, 33, 64, 0.06);
+}
+
 .t65-header .t65-container {
   display: flex;
   align-items: center;
@@ -127,6 +195,9 @@
   height: 64px;
   width: auto;
   object-fit: contain;
+  opacity: 0;
+  transform: scale(0.94);
+  animation: t65-image-reveal var(--t65-duration-slow) var(--t65-ease) forwards;
 }
 
 /* ---------- Hero ---------- */
@@ -155,6 +226,34 @@
   position: relative;
   padding-bottom: 44px;
 }
+
+/* Hero entrance: eyebrow, headline, subhead, meta, and CTA rise in with a
+   short, staggered delay each — reads as one coordinated motion, not four
+   separate animations. Runs once on load; never re-triggers on scroll. */
+@keyframes t65-rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes t65-image-reveal {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+.t65-hero__eyebrow,
+.t65-hero h1,
+.t65-hero__sub,
+.t65-hero__meta,
+.t65-hero__content > .t65-btn {
+  opacity: 0;
+  animation: t65-rise-in var(--t65-duration-slow) var(--t65-ease) forwards;
+}
+
+.t65-hero__eyebrow { animation-delay: 0.05s; }
+.t65-hero h1 { animation-delay: 0.12s; }
+.t65-hero__sub { animation-delay: 0.2s; }
+.t65-hero__meta { animation-delay: 0.28s; }
+.t65-hero__content > .t65-btn { animation-delay: 0.36s; }
 
 .t65-hero__eyebrow {
   display: inline-block;
@@ -207,6 +306,9 @@
   cursor: pointer;
   min-height: 44px;
   line-height: 1.2;
+  transition: transform var(--t65-duration-fast) var(--t65-ease),
+              box-shadow var(--t65-duration-fast) var(--t65-ease),
+              background-color var(--t65-duration-fast) var(--t65-ease);
 }
 
 .t65-btn--primary {
@@ -217,6 +319,12 @@
 .t65-btn--primary:hover,
 .t65-btn--primary:focus-visible {
   background: #e08f26;
+  transform: translateY(-2px);
+  box-shadow: var(--t65-shadow-lift);
+}
+.t65-btn--primary:active {
+  transform: translateY(0);
+  box-shadow: var(--t65-shadow);
 }
 
 .t65-btn--block {
@@ -265,12 +373,15 @@
   border: 1px solid var(--t65-line);
   border-radius: var(--t65-radius);
   padding: 22px 24px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--t65-duration-fast) var(--t65-ease),
+              box-shadow var(--t65-duration-fast) var(--t65-ease),
+              transform var(--t65-duration-fast) var(--t65-ease);
 }
 
 .t65-why__item:hover {
   border-color: var(--t65-orange);
   box-shadow: var(--t65-shadow);
+  transform: translateY(-3px);
 }
 
 .t65-why__icon {
@@ -281,6 +392,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform var(--t65-duration-fast) var(--t65-ease);
+}
+
+.t65-why__item:hover .t65-why__icon {
+  transform: scale(1.08);
 }
 
 /* Explicit modifiers (not :nth-child) so icon colors stay correct if items are
@@ -336,6 +452,15 @@
   border-radius: var(--t65-radius);
   padding: 26px 22px;
   text-align: center;
+  transition: background-color var(--t65-duration-fast) var(--t65-ease),
+              border-color var(--t65-duration-fast) var(--t65-ease),
+              transform var(--t65-duration-fast) var(--t65-ease);
+}
+
+.t65-details__card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-3px);
 }
 
 .t65-details__label {
@@ -433,12 +558,22 @@
   padding: 20px;
 }
 
+/* [hidden] still removes it from layout/AT immediately; the open/close fade
+   is driven by the .is-open class the modal script toggles a frame later
+   (see script at bottom of page), so the fade-in/out actually has time to
+   run instead of being skipped by the display:none swap. */
 .t65-modal[hidden] { display: none; }
 
 .t65-modal__backdrop {
   position: absolute;
   inset: 0;
   background: rgba(42, 33, 64, 0.55);
+  opacity: 0;
+  transition: opacity var(--t65-duration-base) var(--t65-ease);
+}
+
+.t65-modal.is-open .t65-modal__backdrop {
+  opacity: 1;
 }
 
 .t65-modal__dialog {
@@ -452,6 +587,15 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity var(--t65-duration-base) var(--t65-ease),
+              transform var(--t65-duration-base) var(--t65-ease);
+}
+
+.t65-modal.is-open .t65-modal__dialog {
+  opacity: 1;
+  transform: none;
 }
 
 .t65-modal__header {
@@ -522,6 +666,14 @@
   margin: 0 auto 14px;
 }
 
+.t65-footer__social svg {
+  transition: transform var(--t65-duration-fast) var(--t65-ease);
+}
+
+.t65-footer__social:hover svg {
+  transform: scale(1.1);
+}
+
 .t65-footer__name {
   font-family: var(--t65-font-heading);
   font-weight: 700;
@@ -585,6 +737,4 @@
   .t65-details__grid { grid-template-columns: 1fr; }
   .t65-btn { width: 100%; text-align: center; padding: 16px 24px; }
   .t65-page section { padding: 40px 0; }
-  .t65-form-wrap { padding: 26px 20px; }
-  .t65-form-note { text-align: center; }
 }

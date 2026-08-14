@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Marks JS as available before first paint, so the scroll-reveal CSS below
+     can safely start .t65-reveal content hidden. If this never runs (JS
+     disabled), .t65-reveal stays fully visible — see styles.css. -->
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Turning 65 Dinner Seminar | Tracy Davis Insurance Solutions</title>
@@ -31,7 +35,7 @@
 <a class="t65-skip-link" href="#t65-main">Skip to main content</a>
 
 <!-- ============= HEADER ============= -->
-<header class="t65-header">
+<header class="t65-header" id="t65-header">
   <div class="t65-container">
     <img src="assets/logo.jpg" alt="Tracy Davis Insurance Solutions logo" />
   </div>
@@ -54,30 +58,30 @@
 </section>
 
 <!-- ============= 2. WHY ATTEND ============= -->
-<section class="t65-why">
+<section class="t65-why t65-reveal">
   <div class="t65-container">
     <h2 class="t65-section-heading">Why Attend</h2>
     <p class="t65-section-sub">Hosted by a local Crawfordsville advisor since 2017 &mdash; a relaxed evening to help you feel prepared as you approach Medicare.</p>
-    <ul class="t65-why__grid" aria-label="Reasons to attend the seminar">
-      <li class="t65-why__item">
+    <ul class="t65-why__grid" aria-label="Reasons to attend the seminar" data-stagger>
+      <li class="t65-why__item t65-reveal-item">
         <span class="t65-why__icon t65-why__icon--navy" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </span>
         <span class="t65-why__text">Understand the Medicare enrollment process</span>
       </li>
-      <li class="t65-why__item">
+      <li class="t65-why__item t65-reveal-item">
         <span class="t65-why__icon t65-why__icon--evergreen" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         </span>
         <span class="t65-why__text">Learn about different types of Medicare coverage</span>
       </li>
-      <li class="t65-why__item">
+      <li class="t65-why__item t65-reveal-item">
         <span class="t65-why__icon t65-why__icon--orange" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         </span>
         <span class="t65-why__text">Understand important decisions to consider when approaching 65</span>
       </li>
-      <li class="t65-why__item">
+      <li class="t65-why__item t65-reveal-item">
         <span class="t65-why__icon t65-why__icon--navy-light" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </span>
@@ -88,21 +92,21 @@
 </section>
 
 <!-- ============= 3. EVENT DETAILS ============= -->
-<section class="t65-details">
+<section class="t65-details t65-reveal">
   <div class="t65-details__horizon" aria-hidden="true"></div>
   <div class="t65-container">
     <h2 class="t65-section-heading">Turning 65 Dinner Seminar</h2>
     <p class="t65-section-sub">Choose either date &mdash; both cover the same information.</p>
-    <div class="t65-details__grid">
-      <div class="t65-details__card">
+    <div class="t65-details__grid" data-stagger>
+      <div class="t65-details__card t65-reveal-item">
         <p class="t65-details__label">Dates</p>
         <p class="t65-details__value">Tuesday, September 8<br>Thursday, September 17</p>
       </div>
-      <div class="t65-details__card">
+      <div class="t65-details__card t65-reveal-item">
         <p class="t65-details__label">Time</p>
         <p class="t65-details__value">5:30 PM</p>
       </div>
-      <div class="t65-details__card">
+      <div class="t65-details__card t65-reveal-item">
         <p class="t65-details__label">Location</p>
         <p class="t65-details__value">Arni&rsquo;s Crawfordsville<br>114 W Wabash Ave<br>Crawfordsville, IN 47933</p>
       </div>
@@ -111,7 +115,7 @@
 </section>
 
 <!-- ============= 4. REGISTRATION ============= -->
-<section class="t65-register" id="t65-register">
+<section class="t65-register t65-reveal" id="t65-register">
   <div class="t65-container">
     <h2 class="t65-section-heading">Reserve Your Seat</h2>
     <p class="t65-section-sub">Choose the date that works best for you and we&rsquo;ll confirm your registration by text.</p>
@@ -122,7 +126,7 @@
 </section>
 
 <!-- ============= 5. REASSURANCE ============= -->
-<section class="t65-reassure">
+<section class="t65-reassure t65-reveal">
   <div class="t65-container">
     <div class="t65-reassure__card">
       <h2>Clear information. No pressure.</h2>
@@ -132,7 +136,7 @@
 </section>
 
 <!-- ============= 6. FINAL CTA ============= -->
-<section class="t65-final-cta">
+<section class="t65-final-cta t65-reveal">
   <div class="t65-container">
     <h2>Ready to take the next step toward understanding Medicare?</h2>
     <p>Choose your seminar date below and reserve your seat.</p>
@@ -186,19 +190,34 @@
     var modal = document.getElementById('t65-registration-modal');
     if (!modal) return;
     var lastFocused = null;
+    var closeTimer = null;
+    var CLOSE_MS = 300; /* matches --t65-duration-base; modal fade-out length */
 
     function openModal() {
+      clearTimeout(closeTimer);
       lastFocused = document.activeElement;
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
+      /* Remove [hidden] first, add .is-open on the next frame so the
+         opacity/transform transition actually has a starting state to
+         animate from instead of jumping straight to the end state. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          modal.classList.add('is-open');
+        });
+      });
       var closeBtn = modal.querySelector('.t65-modal__close');
       if (closeBtn) closeBtn.focus();
     }
 
     function closeModal() {
-      modal.hidden = true;
+      modal.classList.remove('is-open');
       document.body.style.overflow = '';
       if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(function () {
+        modal.hidden = true;
+      }, CLOSE_MS);
     }
 
     document.querySelectorAll('[data-open-registration]').forEach(function (el) {
@@ -211,6 +230,58 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  })();
+</script>
+<script>
+  (function () {
+    /* ---------- Header scroll-blur ---------- */
+    var header = document.getElementById('t65-header');
+    if (header) {
+      var onScroll = function () {
+        header.classList.toggle('is-scrolled', window.scrollY > 24);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    /* ---------- Scroll reveal ----------
+       Progressive enhancement: .t65-reveal / .t65-reveal-item start hidden
+       via CSS only so JS-off visitors still see full content immediately
+       (no IntersectionObserver support assumed). Sections reveal once and
+       stay revealed — no re-hiding on scroll-up, which reads as calmer and
+       more "invisible" than a replay-every-time effect. */
+    var prefersReducedMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+      document.querySelectorAll('.t65-reveal, .t65-reveal-item').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.classList.add('is-visible');
+
+        var staggerGroup = el.querySelector('[data-stagger]');
+        if (staggerGroup) {
+          var items = staggerGroup.querySelectorAll('.t65-reveal-item');
+          items.forEach(function (item, i) {
+            item.style.transitionDelay = (i * 80) + 'ms';
+            item.classList.add('is-visible');
+          });
+        }
+
+        revealObserver.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.t65-reveal').forEach(function (el) {
+      revealObserver.observe(el);
     });
   })();
 </script>
