@@ -258,6 +258,12 @@ html.js .t65-reveal-item.is-visible {
 
 .t65-hero__eyebrow {
   display: inline-block;
+  /* max-width: 100% does not reliably constrain an inline-block against an
+     ancestor whose own width comes from a percentage/flow chain rather than
+     a fixed value — confirmed by testing: it fails to prevent overflow on
+     narrow viewports even though the pill's parent is width:100%. A vw-based
+     cap resolves against the viewport directly and reliably forces wrapping. */
+  max-width: 90vw;
   font-family: var(--t65-font-heading);
   font-weight: 700;
   font-size: 15px;
@@ -288,7 +294,7 @@ html.js .t65-reveal-item.is-visible {
 
 .t65-hero__photo {
   margin: 0 auto;
-  max-width: 480px;
+  max-width: 640px;
   border-radius: var(--t65-radius);
   overflow: hidden;
   box-shadow: var(--t65-shadow-lift);
@@ -299,13 +305,11 @@ html.js .t65-reveal-item.is-visible {
 }
 
 .t65-hero__photo img {
+  display: block;
   width: 100%;
-  height: 380px;
+  height: 340px;
   object-fit: cover;
-  /* A near-square crop box gives object-fit: cover enough room to show both
-     people fully in frame — a wider banner ratio ran out of horizontal
-     pixels on this source and cropped into the man's face. */
-  object-position: 32% 25%;
+  object-position: 50% 38%;
 }
 
 /* Meta + CTA read as one action unit directly under the photo — the detail
@@ -318,10 +322,19 @@ html.js .t65-reveal-item.is-visible {
   margin: 22px 0 18px;
 }
 
+@media (max-width: 900px) {
+  .t65-hero__photo { max-width: 560px; }
+  .t65-hero__photo img { height: 300px; }
+}
+
 @media (max-width: 720px) {
-  .t65-hero__photo { max-width: 400px; }
-  .t65-hero__photo img { height: 320px; }
+  .t65-hero__photo { max-width: 100%; }
+  .t65-hero__photo img { height: 260px; }
   .t65-hero__meta { margin: 18px 0 16px; }
+}
+
+@media (max-width: 420px) {
+  .t65-hero__photo img { height: 220px; }
 }
 
 /* ---------- Buttons ---------- */

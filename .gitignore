@@ -1,3 +1,7 @@
 skills/
 .DS_Store
 Thumbs.db
+
+# Raw uploaded source images (unoptimized originals). Processed, web-ready
+# versions live in assets/ and are committed; the raw source stays local.
+ChatGPT Image*.png
