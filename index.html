@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Turning 65 Dinner Seminar | Tracy Davis Insurance Solutions</title>
 <meta name="description" content="Join Tracy Davis Insurance Solutions for a complimentary dinner seminar on understanding Medicare as you approach age 65. Crawfordsville, IN." />
+<meta name="theme-color" content="#2A2140" />
+
+<!-- Open Graph: gives the link a real preview card when texted or shared on Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Turning 65? Free Medicare Dinner Seminar" />
+<meta property="og:description" content="Complimentary dinner seminar in Crawfordsville, IN &mdash; understand your Medicare options with confidence." />
+<!-- PRE-LAUNCH BLOCKER: og:image below is a relative path + a placeholder logo.
+     1) Most link unfurlers (iMessage, Facebook, Slack) fail to resolve relative
+        og:image URLs — this MUST become an absolute URL once the page has a
+        real domain, e.g. https://solutions.tracydavisinsurance.com/turning-65-dinner/assets/share.jpg
+     2) Replace the plain logo with a designed 1200x630 share image before launch. -->
+<meta property="og:image" content="assets/logo.jpg" />
+
+<!-- Favicon placeholder: swap for a proper favicon.ico / apple-touch-icon before launch -->
+<link rel="icon" href="assets/logo.jpg" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,7 +28,7 @@
 </head>
 <body class="t65-page">
 
-<a class="t65-skip-link" href="#t65-register">Skip to registration form</a>
+<a class="t65-skip-link" href="#t65-main">Skip to main content</a>
 
 <!-- ============= HEADER ============= -->
 <header class="t65-header">
@@ -21,19 +37,18 @@
   </div>
 </header>
 
+<main id="t65-main">
+
 <!-- ============= 1. HERO ============= -->
 <section class="t65-hero">
-  <div class="t65-container">
-    <span class="t65-hero__eyebrow">Complimentary Dinner Seminar</span>
+  <div class="t65-hero__horizon" aria-hidden="true"></div>
+  <div class="t65-container t65-hero__content">
+    <span class="t65-hero__eyebrow">Complimentary Dinner Seminar &middot; Crawfordsville, IN</span>
     <h1>Turning 65? Get Ready for Medicare With Confidence.</h1>
     <p class="t65-hero__sub">
       Join us for a complimentary dinner seminar designed to help people approaching Medicare understand their options and prepare for the decisions ahead.
     </p>
-    <ul class="t65-hero__facts">
-      <li>Tue, Sept 8 or Thu, Sept 17</li>
-      <li>5:30 PM</li>
-      <li>Arni&rsquo;s Crawfordsville</li>
-    </ul>
+    <p class="t65-hero__meta">Tuesday, Sept 8 or Thursday, Sept 17 &middot; 5:30 PM &middot; Arni&rsquo;s Crawfordsville</p>
     <a class="t65-btn t65-btn--primary" href="#t65-register">Reserve My Seat</a>
   </div>
 </section>
@@ -42,22 +57,30 @@
 <section class="t65-why">
   <div class="t65-container">
     <h2 class="t65-section-heading">Why Attend</h2>
-    <p class="t65-section-sub">A relaxed evening to help you feel prepared as you approach Medicare.</p>
-    <ul class="t65-why__grid">
+    <p class="t65-section-sub">Hosted by a local Crawfordsville advisor since 2017 &mdash; a relaxed evening to help you feel prepared as you approach Medicare.</p>
+    <ul class="t65-why__grid" aria-label="Reasons to attend the seminar">
       <li class="t65-why__item">
-        <span class="t65-why__icon" aria-hidden="true">&#10003;</span>
+        <span class="t65-why__icon t65-why__icon--navy" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </span>
         <span class="t65-why__text">Understand the Medicare enrollment process</span>
       </li>
       <li class="t65-why__item">
-        <span class="t65-why__icon" aria-hidden="true">&#10003;</span>
+        <span class="t65-why__icon t65-why__icon--evergreen" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </span>
         <span class="t65-why__text">Learn about different types of Medicare coverage</span>
       </li>
       <li class="t65-why__item">
-        <span class="t65-why__icon" aria-hidden="true">&#10003;</span>
+        <span class="t65-why__icon t65-why__icon--orange" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </span>
         <span class="t65-why__text">Understand important decisions to consider when approaching 65</span>
       </li>
       <li class="t65-why__item">
-        <span class="t65-why__icon" aria-hidden="true">&#10003;</span>
+        <span class="t65-why__icon t65-why__icon--navy-light" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </span>
         <span class="t65-why__text">Get questions answered in a relaxed dinner setting</span>
       </li>
     </ul>
@@ -66,6 +89,7 @@
 
 <!-- ============= 3. EVENT DETAILS ============= -->
 <section class="t65-details">
+  <div class="t65-details__horizon" aria-hidden="true"></div>
   <div class="t65-container">
     <h2 class="t65-section-heading">Turning 65 Dinner Seminar</h2>
     <p class="t65-section-sub">Choose either date &mdash; both cover the same information.</p>
@@ -98,20 +122,21 @@
            and does not submit anywhere. Replace it with the GHL form embed before
            this page goes live. -->
       <form class="t65-form" novalidate onsubmit="return false;">
+        <p class="t65-form-note">Fields marked <span aria-hidden="true">*</span><span class="t65-visually-hidden">(required)</span> are required.</p>
         <div class="t65-field">
-          <label for="t65-name">Full Name</label>
+          <label for="t65-name">Full Name <span aria-hidden="true">*</span></label>
           <input type="text" id="t65-name" name="full_name" autocomplete="name" required />
         </div>
         <div class="t65-field">
-          <label for="t65-phone">Phone Number</label>
+          <label for="t65-phone">Phone Number <span aria-hidden="true">*</span></label>
           <input type="tel" id="t65-phone" name="phone" autocomplete="tel" required />
         </div>
         <div class="t65-field">
-          <label for="t65-email">Email Address</label>
+          <label for="t65-email">Email Address <span aria-hidden="true">*</span></label>
           <input type="email" id="t65-email" name="email" autocomplete="email" required />
         </div>
         <div class="t65-field">
-          <label for="t65-date">Preferred Seminar Date</label>
+          <label for="t65-date">Preferred Seminar Date <span aria-hidden="true">*</span></label>
           <select id="t65-date" name="preferred_date" required>
             <option value="">Select a date&hellip;</option>
             <option value="2026-09-08">Tuesday, September 8</option>
@@ -127,8 +152,10 @@
 <!-- ============= 5. REASSURANCE ============= -->
 <section class="t65-reassure">
   <div class="t65-container">
-    <h2>Clear information. No pressure.</h2>
-    <p>The seminar is designed to provide educational information to help people better understand Medicare as they approach age 65.</p>
+    <div class="t65-reassure__card">
+      <h2>Clear information. No pressure.</h2>
+      <p>The seminar is designed to provide educational information to help people better understand Medicare as they approach age 65.</p>
+    </div>
   </div>
 </section>
 
@@ -136,15 +163,17 @@
 <section class="t65-final-cta">
   <div class="t65-container">
     <h2>Ready to take the next step toward understanding Medicare?</h2>
-    <p>Choose your seminar date and reserve your seat.</p>
+    <p>Choose your seminar date below and reserve your seat.</p>
     <a class="t65-btn t65-btn--primary" href="#t65-register">Reserve My Seat</a>
   </div>
 </section>
 
+</main>
+
 <!-- ============= 7. FOOTER ============= -->
 <footer class="t65-footer">
   <div class="t65-container">
-    <img src="assets/logo.jpg" alt="Tracy Davis Insurance Solutions logo" />
+    <img src="assets/logo.jpg" alt="" />
     <p>Tracy Davis Insurance Solutions &mdash; Crawfordsville, IN</p>
     <div class="t65-footer__disclaimer">
       <!-- Compliance disclaimer placeholder: insert required Medicare marketing disclaimer text here when provided. -->

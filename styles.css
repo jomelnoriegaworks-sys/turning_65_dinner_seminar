@@ -7,18 +7,20 @@
   --t65-navy: #2A2140;
   --t65-navy-light: #3B2E5A;
   --t65-orange: #F2A03D;
+  --t65-orange-deep: #B8650F;
   --t65-orange-light: #FCEBD3;
+  --t65-evergreen: #33513E;
   --t65-offwhite: #FAF9F7;
   --t65-white: #FFFFFF;
   --t65-text: #2A2140;
   --t65-text-muted: #5B5468;
   --t65-line: #E3DFE8;
-  --t65-success: #2E7D4F;
 
-  --t65-font-heading: 'Montserrat', Arial, sans-serif;
-  --t65-font-body: 'Open Sans', Arial, sans-serif;
+  --t65-font-heading: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  --t65-font-body: 'Open Sans', 'Segoe UI', Arial, sans-serif;
 
   --t65-shadow: 0 6px 20px rgba(42, 33, 64, 0.10);
+  --t65-shadow-lift: 0 14px 34px rgba(42, 33, 64, 0.16);
   --t65-radius: 12px;
 }
 
@@ -51,13 +53,49 @@
   .t65-page * { animation: none !important; transition: none !important; }
 }
 
-/* Visible focus states for keyboard accessibility */
+/* Windows High Contrast / forced-colors mode: make sure interactive
+   boundaries survive when custom colors are stripped out by the OS. */
+@media (forced-colors: active) {
+  .t65-btn { border: 2px solid ButtonText; }
+  .t65-field input,
+  .t65-field select { border: 2px solid ButtonText; }
+  .t65-why__item,
+  .t65-details__card,
+  .t65-form-wrap,
+  .t65-reassure__card { border: 1px solid CanvasText; }
+  .t65-hero__horizon,
+  .t65-details__horizon { display: none; }
+}
+
+/* Visible focus states for keyboard accessibility.
+   --t65-orange fails 3:1 non-text contrast on light backgrounds, so light-surface
+   controls use --t65-orange-deep (5.2:1 on white); dark-surface controls keep
+   --t65-orange, which passes comfortably against navy. */
 .t65-page a:focus-visible,
 .t65-page button:focus-visible,
 .t65-page input:focus-visible,
 .t65-page select:focus-visible {
-  outline: 3px solid var(--t65-orange);
+  outline: 3px solid var(--t65-orange-deep);
   outline-offset: 2px;
+}
+
+.t65-details a:focus-visible,
+.t65-final-cta a:focus-visible,
+.t65-final-cta button:focus-visible {
+  outline-color: var(--t65-orange);
+}
+
+/* ---------- Utilities ---------- */
+.t65-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---------- Skip link ---------- */
@@ -95,9 +133,29 @@
 
 /* ---------- Hero ---------- */
 .t65-hero {
+  position: relative;
   background: linear-gradient(180deg, var(--t65-offwhite) 0%, var(--t65-white) 100%);
-  padding: 48px 0 56px;
+  padding: 48px 0 0;
   text-align: center;
+  overflow: hidden;
+}
+
+/* Faint sunset-over-horizon callback to the logo mark. Decorative only. */
+.t65-hero__horizon {
+  position: absolute;
+  left: 50%;
+  top: -140px;
+  width: 640px;
+  height: 640px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 160, 61, 0.16) 0%, rgba(242, 160, 61, 0) 70%);
+  pointer-events: none;
+}
+
+.t65-hero__content {
+  position: relative;
+  padding-bottom: 44px;
 }
 
 .t65-hero__eyebrow {
@@ -130,25 +188,12 @@
   margin: 0 auto 28px;
 }
 
-.t65-hero__facts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin: 0 0 32px;
-  padding: 0;
-  list-style: none;
-}
-
-.t65-hero__facts li {
+.t65-hero__meta {
   font-family: var(--t65-font-heading);
   font-weight: 700;
   font-size: 16px;
   color: var(--t65-navy);
-  background: var(--t65-white);
-  border: 2px solid var(--t65-line);
-  border-radius: 999px;
-  padding: 10px 20px;
+  margin: 20px 0 0;
 }
 
 /* ---------- Buttons ---------- */
@@ -185,6 +230,7 @@
 /* ---------- Why Attend ---------- */
 .t65-why {
   background: var(--t65-white);
+  padding: 64px 0;
 }
 
 .t65-section-heading {
@@ -221,6 +267,12 @@
   border: 1px solid var(--t65-line);
   border-radius: var(--t65-radius);
   padding: 22px 24px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.t65-why__item:hover {
+  border-color: var(--t65-orange);
+  box-shadow: var(--t65-shadow);
 }
 
 .t65-why__icon {
@@ -228,15 +280,17 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--t65-navy);
-  color: var(--t65-orange);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--t65-font-heading);
-  font-weight: 800;
-  font-size: 18px;
 }
+
+/* Explicit modifiers (not :nth-child) so icon colors stay correct if items are
+   reordered or a new one is added in GHL's editor. Every icon gets one. */
+.t65-why__icon--navy { background: var(--t65-navy); color: var(--t65-orange); }
+.t65-why__icon--evergreen { background: var(--t65-evergreen); color: var(--t65-white); }
+.t65-why__icon--orange { background: var(--t65-orange-deep); color: var(--t65-white); }
+.t65-why__icon--navy-light { background: var(--t65-navy-light); color: var(--t65-orange); }
 
 .t65-why__text {
   font-size: 17px;
@@ -247,15 +301,30 @@
 
 /* ---------- Event details ---------- */
 .t65-details {
-  background: var(--t65-navy);
+  position: relative;
+  background: var(--t65-evergreen);
   color: var(--t65-white);
+  overflow: hidden;
 }
+
+.t65-details__horizon {
+  position: absolute;
+  right: -120px;
+  bottom: -180px;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 160, 61, 0.12) 0%, rgba(242, 160, 61, 0) 70%);
+  pointer-events: none;
+}
+
+.t65-details .t65-container { position: relative; }
 
 .t65-details .t65-section-heading,
 .t65-details .t65-section-sub {
   color: var(--t65-white);
 }
-.t65-details .t65-section-sub { color: #D8D3E3; }
+.t65-details .t65-section-sub { color: #DCEAE3; }
 
 .t65-details__grid {
   display: grid;
@@ -272,13 +341,17 @@
 }
 
 .t65-details__label {
+  display: inline-block;
   font-family: var(--t65-font-heading);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: var(--t65-orange);
-  margin: 0 0 10px;
+  color: var(--t65-navy);
+  background: var(--t65-orange-light);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin: 0 0 14px;
 }
 
 .t65-details__value {
@@ -299,16 +372,21 @@
   margin: 0 auto;
   background: var(--t65-white);
   border: 1px solid var(--t65-line);
+  border-top: 4px solid var(--t65-orange);
   border-radius: var(--t65-radius);
-  box-shadow: var(--t65-shadow);
+  box-shadow: var(--t65-shadow-lift);
   padding: 36px 32px;
 }
 
 .t65-form-note {
-  text-align: center;
+  text-align: right;
   color: var(--t65-text-muted);
-  margin: 0 0 28px;
-  font-size: 17px;
+  margin: 0 0 20px;
+  font-size: 14px;
+}
+
+.t65-field label span[aria-hidden="true"] {
+  color: var(--t65-orange-deep);
 }
 
 .t65-field {
@@ -343,23 +421,20 @@
   outline: none;
 }
 
-.t65-ghl-embed {
-  border: 2px dashed var(--t65-orange);
-  background: var(--t65-orange-light);
-  border-radius: 8px;
-  padding: 18px 20px;
-  font-family: var(--t65-font-heading);
-  font-weight: 700;
-  font-size: 14px;
-  color: #8a6d1f;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 /* ---------- Reassurance ---------- */
 .t65-reassure {
-  background: var(--t65-white);
+  background: var(--t65-offwhite);
   text-align: center;
+  padding: 44px 0;
+}
+
+.t65-reassure__card {
+  max-width: 620px;
+  margin: 0 auto;
+  background: var(--t65-white);
+  border: 1px solid var(--t65-line);
+  border-radius: var(--t65-radius);
+  padding: 32px 36px;
 }
 
 .t65-reassure h2 {
@@ -367,12 +442,11 @@
   font-weight: 800;
   font-size: 26px;
   color: var(--t65-navy);
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 
 .t65-reassure p {
-  max-width: 620px;
-  margin: 0 auto;
+  margin: 0;
   color: var(--t65-text-muted);
   font-size: 18px;
 }
@@ -422,8 +496,9 @@
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid var(--t65-line);
-  font-size: 12px;
-  color: #8b8398;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--t65-text-muted);
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
@@ -432,12 +507,16 @@
 /* ---------- Mobile ---------- */
 @media (max-width: 720px) {
   .t65-page { font-size: 17px; }
+  .t65-hero { padding-top: 36px; }
+  .t65-hero__horizon { width: 420px; height: 420px; top: -100px; }
   .t65-hero h1 { font-size: 30px; }
   .t65-hero__sub { font-size: 18px; }
+  .t65-hero__meta { font-size: 15px; }
   .t65-section-heading { font-size: 25px; }
   .t65-why__grid { grid-template-columns: 1fr; }
   .t65-details__grid { grid-template-columns: 1fr; }
   .t65-btn { width: 100%; text-align: center; padding: 16px 24px; }
   .t65-page section { padding: 40px 0; }
   .t65-form-wrap { padding: 26px 20px; }
+  .t65-form-note { text-align: center; }
 }
