@@ -522,7 +522,7 @@
 .t65-footer__social {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--t65-navy);
   font-family: var(--t65-font-heading);
   font-weight: 700;
